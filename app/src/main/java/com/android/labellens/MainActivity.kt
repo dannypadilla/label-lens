@@ -1,4 +1,4 @@
-package com.android.cameraxtest
+package com.android.labellens
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -19,6 +19,7 @@ import java.io.File
 import java.util.concurrent.Executors
 
 
+/* Constants */
 private const val REQUEST_CODE_PERMISSION = 10 // arbitrary val
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // all permissions specified in manifest
 
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         viewFinder = findViewById(R.id.view_finder)
 
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener {_, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
+
     }
 
 
@@ -94,14 +97,14 @@ class MainActivity : AppCompatActivity() {
                         exc: Throwable?
                     ) {
                         val msg = "Photo Capture Failed: $message"
-                        Log.e("CameraXTest", msg, exc)
+                        Log.e("Label Lens", msg, exc)
                         viewFinder.post {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                     override fun onImageSaved(file: File) {
                         val msg = "Photo capture Suceeded: ${file.absolutePath}"
-                        Log.d("CameraXTest", msg)
+                        Log.d("Label Lens", msg)
                         viewFinder.post {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         }
@@ -180,5 +183,6 @@ class MainActivity : AppCompatActivity() {
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
+
 
 }

@@ -1,4 +1,4 @@
-package com.android.cameraxtest
+package com.android.labellens
 
 import android.util.Log
 import androidx.camera.core.ImageAnalysis
@@ -14,7 +14,7 @@ class LuminosityAnalyzer : ImageAnalysis.Analyzer {
      * Helper extension function used to extract a byte array from
      * an image plane buffer.
      */
-    private fun ByteBuffer.toByteAray(): ByteArray {
+    private fun ByteBuffer.toByteArray(): ByteArray {
         rewind() // Rewind buffer to zero
         val data = ByteArray(remaining() )
         get(data) // Copy the buffer into a byte array
@@ -32,7 +32,7 @@ class LuminosityAnalyzer : ImageAnalysis.Analyzer {
             val buffer = image.planes[0].buffer
 
             // Extract image data from callback object
-            val data = buffer.toByteAray()
+            val data = buffer.toByteArray()
 
             // Convert the data into an array of pixel values
             val pixels = data.map { it.toInt() and 0xFF }

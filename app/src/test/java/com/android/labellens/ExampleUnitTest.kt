@@ -1,4 +1,4 @@
-package com.android.cameraxtest
+package com.android.labellens
 
 import org.junit.Test
 
