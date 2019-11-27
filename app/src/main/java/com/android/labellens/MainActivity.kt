@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     override fun onImageSaved(file: File) {
-                        val msg = "Photo capture Suceeded: ${file.absolutePath}"
+                        val msg = "Photo capture Succeeded: ${file.absolutePath}"
                         Log.d("Label Lens", msg)
                         viewFinder.post {
                             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
