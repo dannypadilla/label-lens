@@ -41,7 +41,7 @@ class LuminosityAnalyzer : ImageAnalysis.Analyzer {
             val luma = pixels.average()
 
             // Lof the new luma value
-            Log.d("CameraXTest", "Average luminosity: $luma")
+            Log.d("LabelLens", "Average luminosity: $luma")
 
             // Update timestamp of last analyzed frame
             this.lastAnalyzedTimestamp = currentTimestamp
