@@ -44,8 +44,7 @@ class CameraDisplay : Fragment() {
                 startCamera()
             }
         } else {
-
-            ActivityCompat.requestPermissions(this.requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSION)
+            this.requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSION)
         }
 
         // Every time the provided texture view changes, recompute layout
