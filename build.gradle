@@ -3,6 +3,9 @@
 buildscript {
     ext {
         kotlin_version = '1.3.41'
+        gradleVersion = "3.5.0"
+        supportlibVersion = "1.0.0-rc03"
+
         navigationVersion = "1.0.0-rc02"
     }
     repositories {
