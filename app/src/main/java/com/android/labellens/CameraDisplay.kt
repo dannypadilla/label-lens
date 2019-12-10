@@ -20,10 +20,11 @@ import java.io.File
 import java.util.concurrent.Executors
 
 
-private const val REQUEST_CODE_PERMISSION = 10 // arbitrary val
-private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // all permissions specified in manifest
 
 class CameraDisplay : Fragment() {
+
+    val REQUEST_CODE_PERMISSION = 10 // arbitrary val
+    private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA) // all permissions specified in manifest
 
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var viewFinder: TextureView
