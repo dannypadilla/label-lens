@@ -1,45 +1,64 @@
 # Label Lens
+Label Lens aims to provide a powerful tool to train computer vision algorithms.
+  1. Take pictures at the click of a button
+  2. View and select images
+  3. Crop and label images
 
+## Features
+- Image taking
+- Image storing
+- Image processing
+- Image uploading
+- Supports various android versions
 
-### Android App
+## Usages
+Dependancy: This project runs on CameraX which can be found here: https://github.com/android/camera-samples
 
-#### TODO
+## How-to-Use
+  1. Take a picture with camera (via app)
+  2. View and edit picture as necessary
+  3. Output / uploading the image
 
-- Create method to upload data from phone
-- Setup backend to store data as (Image, Label)
-- use Camera2 to capture image
-- Create GUI for drawing boxes overlayed on captured image
-- Make an API to get labeled data off backend
-
-### Accessing Labelled Images
-1. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux-mac.html#cliv2-linux--mac-prereq)
-2. Navigate to your desired location in the terminal
-3. `aws s3 sync s3://labellens-userfiles-mobilehub-866544857/public/* <your_folder>`
-4. Look at the things 👍
+## Accessing Labelled Images
+  1. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux-mac.html#cliv2-linux--mac-prereq)
+  2. Navigate to your desired location in the terminal
+  3. `aws s3 sync s3://labellens-userfiles-mobilehub-866544857/public/* <your_folder>`
+  4. Examine the results 👍
 
 ## Fragments
+  1. Main Menu Fragment
+    - Display App name (Label Lens)
+    - Display Camera Display Button (#2)
+    - Display Photo Gallery Button (#3)
+    - Display Labeling Button (#4)
+    - Display an info explanation Button
 
-1. Main Menu Fragment
-  - Display App name (Label Lens).
-  - Display Camera Display Button.
-  - Display Photo Gallery Button.
-  - Display Labeling Button.
-  - Display an info explanation Button.
+  2. Camera Display Fragment
+    - For taking pictures.
+    - Stores images to local device (phone)
 
-2. Camera Display Fragment
-  - For taking pictures.
-  - Stores images to local device (phone).
+  3. Photo Gallery Fragment
+    - For reviewing images taken
+    - Can swipe right/left to swap images
+    - Pictures ordered by date
 
-3. Photo Gallery Fragment
-  - For reviewing images taken.
+  4. Label-Images Fragment
+    - Displays last taken image.
+    - When a portion of the image is tapped, a square box is displayed.
+    - The box shall bound the area where the tap was detected.
+    - The coordinates of the box are stored as a JSON.
 
-4. Label-Images Fragment
-  - Displays last taken image.
-  - When a portion of the image is tapped, a square box is displayed.
-  - The box shall bound the area where the tap was detected.
-  - The coordinates of the box are stored as a JSON.
+  5. Region of interest Gallery
+    - Display the square bounding boxes created in the `Label-Images Fragment`
+    - This Fragment can be displayed after the `Camera Display Fragment`.
 
+## Finished
+  - Way to upload data from phone
+  - Picture taking method
+  - Picture saving/storing
+  - Implement CameraX
 
-5. Region of interest Gallery
-  - Display the square bounding boxes created in the `Label-Images Fragment`
-  - This Fragment can be displayed after the `Camera Display Fragment`.
+## TODO
+  - use Camera2 to capture image (Replaced by CameraX)
+  - Create GUI for drawing boxes overlayed on captured image
+  - Make an API to get labeled data off backend
