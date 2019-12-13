@@ -113,6 +113,8 @@ class CameraDisplay : Fragment() {
                         Log.d("Label Lens", msg)
                         viewFinder.post {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+
+                            //move this to wherever the image gets labelled so we can upload both at the same time
                             mobileHelper.uploadWithTransferUtility(file)
                         }
                     }

@@ -1,6 +1,5 @@
 package com.android.labellens
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.amazonaws.mobile.client.AWSMobileClient
@@ -10,7 +9,8 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.services.s3.AmazonS3Client
 import java.io.File
 
-class MobileHubHelper(val context: Context) {
+
+class MobileHubHelper(private val context: Context) {
     val LOG_TAG = "MobileHub"
 
     fun uploadWithTransferUtility(file: File) {
@@ -20,8 +20,7 @@ class MobileHubHelper(val context: Context) {
             .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
             .build()
 
-
-        val uploadObserver = transferUtility.upload("labellens-userfiles-mobilehub-866544857/public", "0001.jpg", file)
+        val uploadObserver = transferUtility.upload("labellens-userfiles-mobilehub-866544857/public", file.name, file)
 
         // Attach a listener to the observer
         uploadObserver.setTransferListener(object : TransferListener {
