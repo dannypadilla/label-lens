@@ -15,6 +15,11 @@ import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+<<<<<<< Updated upstream
+=======
+import androidx.navigation.findNavController
+import com.amazonaws.mobile.client.AWSMobileClient
+>>>>>>> Stashed changes
 import com.android.labellens.databinding.FragmentCameraDisplayBinding
 import java.io.File
 import java.util.concurrent.Executors
@@ -28,6 +33,11 @@ class CameraDisplay : Fragment() {
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var viewFinder: TextureView
     private lateinit var captureButton: ImageButton
+<<<<<<< Updated upstream
+=======
+    private lateinit var mobileHelper: MobileHubHelper
+    private lateinit var imageCapture: ImageCapture
+>>>>>>> Stashed changes
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -52,6 +62,13 @@ class CameraDisplay : Fragment() {
             updateTransform()
         }
 
+<<<<<<< Updated upstream
+=======
+        cameraButtonClick()
+
+        AWSMobileClient.getInstance().initialize(this.context).execute()
+
+>>>>>>> Stashed changes
         return binding.root
     }
 
@@ -87,35 +104,7 @@ class CameraDisplay : Fragment() {
         }.build()
 
         // Build the image capture use case and attach BUTTON click listener
-        val imageCapture = ImageCapture(imageCaptureConfig)
-        this.captureButton.setOnClickListener {
-            //val file = File(externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
-            val file = File(requireContext().externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
-
-            imageCapture.takePicture(file, executor,
-                object: ImageCapture.OnImageSavedListener {
-
-                    override fun onError(
-                        imageCaptureError: ImageCapture.ImageCaptureError,
-                        message: String,
-                        exc: Throwable?
-                    ) {
-                        val msg = "Photo Capture Failed: $message"
-                        Log.e("Label Lens", msg, exc)
-                        viewFinder.post {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    override fun onImageSaved(file: File) {
-                        val msg = "Photo capture Succeeded: ${file.absolutePath}"
-                        Log.d("Label Lens", msg)
-                        viewFinder.post {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            )
-        }
+        this.imageCapture = ImageCapture(imageCaptureConfig)
 
 
         /* Image Analysis USE CASE */
@@ -134,6 +123,47 @@ class CameraDisplay : Fragment() {
 
         // Bind use cases to lifecycle
         CameraX.bindToLifecycle(this, preview, imageCapture, analyzerUseCase) // if complaining, rebuild
+    }
+
+    private fun cameraButtonClick() {
+
+        this.captureButton.setOnClickListener {
+            //val file = File(externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
+            //val file = File(requireContext().externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
+            val file = File(requireContext().externalMediaDirs.first(), "picture.jpg")
+
+            this.imageCapture.takePicture(file, executor,
+                object: ImageCapture.OnImageSavedListener {
+
+                    override fun onError(
+                        imageCaptureError: ImageCapture.ImageCaptureError,
+                        message: String,
+                        exc: Throwable?
+                    ) {
+                        val msg = "Photo Capture Failed: $message"
+                        Log.e("Label Lens", msg, exc)
+                        viewFinder.post {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onImageSaved(file: File) {
+                        val msg = "Photo capture Succeeded: ${file.absolutePath}"
+                        Log.d("Label Lens", msg)
+                        viewFinder.post {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+<<<<<<< Updated upstream
+=======
+
+                            //move this to wherever the image gets labelled so we can upload both at the same time
+                            mobileHelper.uploadWithTransferUtility(file)
+                            view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
+>>>>>>> Stashed changes
+                        }
+                    }
+                }
+            )
+            //view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
+        }
     }
 
 
