@@ -3,6 +3,8 @@ Label Lens aims to provide a powerful tool to train computer vision algorithms.
   1. Take pictures at the click of a button
   2. View and select images
   3. Crop and label images
+  
+  ![Preview_Image](https://github.com/dannypadilla/label-lens/blob/gallery/P.jpg)
 
 ## Features
 - Image taking
@@ -27,30 +29,30 @@ Dependancy: This project runs on CameraX which can be found here: https://github
 
 ## Fragments
   1. Main Menu Fragment
-    - Display App name (Label Lens)
-    - Display Camera Display Button (#2)
-    - Display Photo Gallery Button (#3)
-    - Display Labeling Button (#4)
-    - Display an info explanation Button
+    * Display App name (Label Lens)
+    * Display Camera Display Button (#2)
+    * Display Photo Gallery Button (#3)
+    * Display Labeling Button (#4)
+    * Display an info explanation Button
 
   2. Camera Display Fragment
-    - For taking pictures.
-    - Stores images to local device (phone)
+    * For taking pictures.
+    * Stores images to local device (phone)
 
   3. Photo Gallery Fragment
-    - For reviewing images taken
-    - Can swipe right/left to swap images
-    - Pictures ordered by date
+    * For reviewing images taken
+    * Can swipe right/left to swap images
+    * Pictures ordered by date
 
   4. Label-Images Fragment
-    - Displays last taken image.
-    - When a portion of the image is tapped, a square box is displayed.
-    - The box shall bound the area where the tap was detected.
-    - The coordinates of the box are stored as a JSON.
+    * Displays last taken image.
+    * When a portion of the image is tapped, a square box is displayed.
+    * The box shall bound the area where the tap was detected.
+    * The coordinates of the box are stored as a JSON.
 
   5. Region of interest Gallery
-    - Display the square bounding boxes created in the `Label-Images Fragment`
-    - This Fragment can be displayed after the `Camera Display Fragment`.
+    * Display the square bounding boxes created in the `Label-Images Fragment`
+    * This Fragment can be displayed after the `Camera Display Fragment`.
 
 ## Finished
   - Way to upload data from phone
