@@ -15,11 +15,15 @@ import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 import androidx.navigation.findNavController
 import com.amazonaws.mobile.client.AWSMobileClient
 >>>>>>> Stashed changes
+=======
+import com.amazonaws.mobile.client.AWSMobileClient
+>>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
 import com.android.labellens.databinding.FragmentCameraDisplayBinding
 import java.io.File
 import java.util.concurrent.Executors
@@ -33,12 +37,16 @@ class CameraDisplay : Fragment() {
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var viewFinder: TextureView
     private lateinit var captureButton: ImageButton
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     private lateinit var mobileHelper: MobileHubHelper
     private lateinit var imageCapture: ImageCapture
 >>>>>>> Stashed changes
 
+=======
+    private lateinit var mobileHelper: MobileHubHelper
+>>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -47,7 +55,7 @@ class CameraDisplay : Fragment() {
 
         this.viewFinder = binding.viewFinder
         this.captureButton = binding.captureButton
-
+        this.mobileHelper = MobileHubHelper(this.context!!)
         // Request camera permission
         if (allPermissionsGranted() ) {
             viewFinder.post {
@@ -62,6 +70,7 @@ class CameraDisplay : Fragment() {
             updateTransform()
         }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
         cameraButtonClick()
@@ -69,6 +78,9 @@ class CameraDisplay : Fragment() {
         AWSMobileClient.getInstance().initialize(this.context).execute()
 
 >>>>>>> Stashed changes
+=======
+        AWSMobileClient.getInstance().initialize(this.context).execute()
+>>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
         return binding.root
     }
 
@@ -151,6 +163,7 @@ class CameraDisplay : Fragment() {
                         Log.d("Label Lens", msg)
                         viewFinder.post {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 
@@ -158,6 +171,11 @@ class CameraDisplay : Fragment() {
                             mobileHelper.uploadWithTransferUtility(file)
                             view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
 >>>>>>> Stashed changes
+=======
+
+                            //move this to wherever the image gets labelled so we can upload both at the same time
+                            mobileHelper.uploadWithTransferUtility(file)
+>>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
                         }
                     }
                 }

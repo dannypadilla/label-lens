@@ -2,13 +2,15 @@ package com.android.labellens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.android.labellens.databinding.ActivityMainBinding
+import com.amazonaws.mobile.client.AWSMobileClient
 
 
 class MainActivity : AppCompatActivity() {
-
+    val LOG_TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
@@ -16,7 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         val navController = this.findNavController(R.id.navHostFragment)
 
-
+        AWSMobileClient.getInstance().initialize(this
+        ) {
+            Log.d("MainActivity", "AWSMobileClient is instantiated and you are connected to AWS!")
+        }.execute()
     }
-
 }
