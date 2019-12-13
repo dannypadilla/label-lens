@@ -11,9 +11,13 @@
 - Create GUI for drawing boxes overlayed on captured image
 - Make an API to get labeled data off backend
 
+### Accessing Labelled Images
+1. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux-mac.html#cliv2-linux--mac-prereq)
+2. Navigate to your desired location in the terminal
+3. `aws s3 sync s3://labellens-userfiles-mobilehub-866544857/public/* <your_folder>`
+4. Look at the things 👍
 
 ## Fragments
-
 
 1. Main Menu Fragment
   - Display App name (Label Lens).
