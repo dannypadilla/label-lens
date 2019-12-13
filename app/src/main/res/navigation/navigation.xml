@@ -5,7 +5,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/cameraDisplay">
+    app:startDestination="@id/mainMenu">
+    <!-- app:startDestination="@id/cameraDisplay"> -->
+
+    <fragment
+        android:id="@+id/mainMenu"
+        android:name="com.android.labellens.MainMenu"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenu_to_cameraDisplay"
+            app:destination="@id/cameraDisplay" />
+    </fragment>
 
     <fragment
         android:id="@+id/cameraDisplay"
@@ -23,5 +34,6 @@
         android:name="com.android.labellens.LabelImages"
         android:label="fragment_label_images"
         tools:layout="@layout/fragment_label_images" />
+
 
 </navigation>
