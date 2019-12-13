@@ -11,6 +11,17 @@
         android:id="@+id/cameraDisplay"
         android:name="com.android.labellens.CameraDisplay"
         android:label="fragment_camera_display"
-        tools:layout="@layout/fragment_camera_display" />
+        tools:layout="@layout/fragment_camera_display" >
+        <action
+            android:id="@+id/action_cameraDisplay_to_labelImages"
+            app:destination="@id/labelImages"
+            app:popUpTo="@+id/navigation" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/labelImages"
+        android:name="com.android.labellens.LabelImages"
+        android:label="fragment_label_images"
+        tools:layout="@layout/fragment_label_images" />
 
 </navigation>

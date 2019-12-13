@@ -15,6 +15,7 @@ import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.android.labellens.databinding.FragmentCameraDisplayBinding
 import java.io.File
@@ -30,6 +31,7 @@ class CameraDisplay : Fragment() {
     private lateinit var viewFinder: TextureView
     private lateinit var captureButton: ImageButton
     private lateinit var mobileHelper: MobileHubHelper
+    private lateinit var imageCapture: ImageCapture
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -53,7 +55,12 @@ class CameraDisplay : Fragment() {
             updateTransform()
         }
 
+        cameraButtonClick()
+
         AWSMobileClient.getInstance().initialize(this.context).execute()
+
+        AWSMobileClient.getInstance().initialize(this.context).execute()
+
         return binding.root
     }
 
@@ -89,12 +96,35 @@ class CameraDisplay : Fragment() {
         }.build()
 
         // Build the image capture use case and attach BUTTON click listener
-        val imageCapture = ImageCapture(imageCaptureConfig)
+        this.imageCapture = ImageCapture(imageCaptureConfig)
+
+
+        /* Image Analysis USE CASE */
+
+        // Setup image analysis pipeline that computes average pixel luminance
+        val analyzerConfig = ImageAnalysisConfig.Builder().apply {
+            // In our analysis, we care more about the latest image than analyzing *every* image
+            setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+        }.build()
+
+        // Build the image analysis use case and instantiate our analyzer
+        val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
+            setAnalyzer(executor, LuminosityAnalyzer() )
+        }
+
+
+        // Bind use cases to lifecycle
+        CameraX.bindToLifecycle(this, preview, imageCapture, analyzerUseCase) // if complaining, rebuild
+    }
+
+    private fun cameraButtonClick() {
+
         this.captureButton.setOnClickListener {
             //val file = File(externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
-            val file = File(requireContext().externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
+            //val file = File(requireContext().externalMediaDirs.first(), "${System.currentTimeMillis()}.jpg")
+            val file = File(requireContext().externalMediaDirs.first(), "picture.jpg")
 
-            imageCapture.takePicture(file, executor,
+            this.imageCapture.takePicture(file, executor,
                 object: ImageCapture.OnImageSavedListener {
 
                     override fun onError(
@@ -116,29 +146,17 @@ class CameraDisplay : Fragment() {
 
                             //move this to wherever the image gets labelled so we can upload both at the same time
                             mobileHelper.uploadWithTransferUtility(file)
+                            view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
+
+                            //move this to wherever the image gets labelled so we can upload both at the same time
+                            mobileHelper.uploadWithTransferUtility(file)
+
                         }
                     }
                 }
             )
+            //view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
         }
-
-
-        /* Image Analysis USE CASE */
-
-        // Setup image analysis pipeline that computes average pixel luminance
-        val analyzerConfig = ImageAnalysisConfig.Builder().apply {
-            // In our analysis, we care more about the latest image than analyzing *every* image
-            setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
-        }.build()
-
-        // Build the image analysis use case and instantiate our analyzer
-        val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
-            setAnalyzer(executor, LuminosityAnalyzer() )
-        }
-
-
-        // Bind use cases to lifecycle
-        CameraX.bindToLifecycle(this, preview, imageCapture, analyzerUseCase) // if complaining, rebuild
     }
 
 
@@ -185,12 +203,10 @@ class CameraDisplay : Fragment() {
         }
     }
 
-
     /**
      * Check if all permission specified in the manifest have been granted
      */
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
-
 }
