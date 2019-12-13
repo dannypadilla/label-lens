@@ -47,16 +47,8 @@ dependencies {
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
+
     implementation('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
     implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
->>>>>>> Stashed changes
-=======
-    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
-    implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
-    implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
->>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
 }

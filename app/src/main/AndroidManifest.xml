@@ -3,20 +3,11 @@
     package="com.android.labellens">
 
     <uses-permission android:name="android.permission.CAMERA" />
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
->>>>>>> Stashed changes
-=======
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
->>>>>>> b79091c5f3d1dbb8254ad4430c36c5f0f763ddda
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
