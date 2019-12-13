@@ -2,6 +2,7 @@ package com.android.labellens
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,6 @@ import kotlin.system.exitProcess
 
 
 class MainMenu : Fragment() {
-
     private lateinit var cameraButton: Button
     private lateinit var exitButton: Button
 

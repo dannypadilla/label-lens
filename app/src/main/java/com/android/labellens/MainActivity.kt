@@ -11,6 +11,7 @@ import com.amazonaws.mobile.client.AWSMobileClient
 
 class MainActivity : AppCompatActivity() {
     val LOG_TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         AWSMobileClient.getInstance().initialize(this
         ) {
-            Log.d("MainActivity", "AWSMobileClient is instantiated and you are connected to AWS!")
+            Log.d(LOG_TAG, "AWSMobileClient is instantiated and you are connected to AWS!")
         }.execute()
     }
 }

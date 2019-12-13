@@ -7,4 +7,6 @@
     <string name="camera_view">Camera View</string>
     <string name="exit">Exit</string>
     <string name="label_lens">Label Lens</string>
+    <string name="last_photo">last photo</string>
+    <string name="upload">Upload</string>
 </resources>
