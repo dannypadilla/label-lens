@@ -1,5 +1,5 @@
 # Label Lens
-Label Lens aims to provide a powerful tool to train computer vision algorithms.
+The purpose of Label Lens is to simplify the image-labeling process for computer vision (CV) and machine learning (ML) applications.
   1. Take pictures at the click of a button
   2. View and select images
   3. Crop and label images
