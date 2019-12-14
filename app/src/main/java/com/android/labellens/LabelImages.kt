@@ -1,22 +1,21 @@
 package com.android.labellens
 
-
-import android.content.Context
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.method.Touch
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
-import com.android.labellens.databinding.FragmentCameraDisplayBinding
+import com.amazonaws.mobile.client.AWSMobileClient
 import com.android.labellens.databinding.FragmentLabelImagesBinding
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.text.method.Touch
-import android.view.MotionEvent
+import kotlinx.android.synthetic.main.fragment_label_images.*
+import java.io.File
 
 class LabelImages : Fragment() {
 
@@ -25,14 +24,22 @@ class LabelImages : Fragment() {
     val image_y_res = 640
     val scaling_factor = 80// box size
 
-    private lateinit var imagePreviewView: ImageView
 
+    private lateinit var mobileHelper :MobileHubHelper
+
+    private lateinit var uploadButton: Button
+
+    private lateinit var imagePreviewView: ImageView
+    private var coords = ""
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         val binding = DataBindingUtil.inflate<FragmentLabelImagesBinding>(inflater,
             R.layout.fragment_label_images, container, false)
 
+        this.mobileHelper = MobileHubHelper(this.context!!)
+        this.uploadButton = binding.uploadButton
         this.imagePreviewView = binding.imagePreview
 
         val imagePath = context!!.filesDir.path+"/picture.jpg"
@@ -44,6 +51,7 @@ class LabelImages : Fragment() {
 
         this.imagePreviewView.setImageURI(imagePath.toUri())
         Log.d(LOG_TAG, "Presenting image: ${imagePath.toUri()}")
+        uploadButtonClicked()
 
         var x_center = -1
         var y_center = -1
@@ -121,9 +129,38 @@ class LabelImages : Fragment() {
             Log.d(LOG_TAG, "\nCalculated coordinates \nX_up:${x_up_left}\tY_up:${y_up_left}\n")
             Log.d(LOG_TAG, "\nCalculated coordinates \nX_low:${x_low_right}\tY_low:${y_low_right}\n")
 
+            this.coords = "${x_up_left}, ${y_up_left}, ${x_low_right}, ${y_low_right}"
+
             return@setOnTouchListener true
         }
 
+
+
+        AWSMobileClient.getInstance().initialize(this.context).execute()
+
         return binding.root
     }
+    
+    fun uploadButtonClicked(){
+        this.uploadButton.setOnClickListener{
+            val imageName = "${System.currentTimeMillis()}.jpg"
+            val imageFile = File(context!!.filesDir.path+"/picture.jpg")
+            imageFile.copyTo(File(context!!.filesDir.path, imageName))
+
+            val uploadedFile = File(context!!.filesDir.path+"/"+imageName)
+
+            var textName = imageName.split(".")[0]
+            textName += ".txt"
+            val textFile = File(context!!.filesDir.path, textName)
+            textFile.appendText(this.coords)
+            try {
+                mobileHelper.uploadWithTransferUtility(textFile)
+                mobileHelper.uploadWithTransferUtility(uploadedFile)
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
 }
