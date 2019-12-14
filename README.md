@@ -1,5 +1,5 @@
 # Label Lens
-The purpose of Label Lens is to simplify the image-labeling process for computer vision (CV) and machine learning (ML) applications.
+The purpose of Label Lens is to simplify the image-labeling process for computer vision (CV) and machine learning (ML) applications. Image-labeling is the process of recognizing different entities, or regions of interest (ROI), in an image. Label Lens provides the user a platform to capture images and label regions of interest in the captured image. The captured images and ROI’s are stored as an image and a text document, respectively. The text document contains the square coordinate location where the ROI is located in the captured images. The files are stored on device and in an Amazon Web Service (AWS) Simple Storage Service (S3) Bucket database for easy retrieval. 
   1. Take pictures at the click of a button
   2. View and select images
   3. Crop and label images
