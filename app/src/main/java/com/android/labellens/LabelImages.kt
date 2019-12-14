@@ -47,12 +47,7 @@ class LabelImages : Fragment() {
         AWSMobileClient.getInstance().initialize(this.context).execute()
         return binding.root
     }
-    fun labelImage(touch: Touch) : String{
-        return ""
-    }
-    suspend fun mobileUpload(){
-
-    }
+    
     fun uploadButtonClicked(){
         this.uploadButton.setOnClickListener{
             val imageName = "${System.currentTimeMillis()}.jpg"
