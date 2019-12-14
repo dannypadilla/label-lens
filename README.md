@@ -1,5 +1,6 @@
 # Label Lens
-Label Lens aims to provide a powerful tool to train computer vision algorithms.
+
+The purpose of Label Lens is to simplify the image-labeling process for computer vision (CV) and machine learning (ML) applications. Image-labeling is the process of recognizing different entities, or regions of interest (ROI), in an image. Label Lens provides the user a platform to capture images and label regions of interest in the captured image. The captured images and ROI’s are stored as an image and a text document, respectively. The text document contains the square coordinate location where the ROI is located in the captured images. The files are stored on device and in an Amazon Web Service (AWS) Simple Storage Service (S3) Bucket database for easy retrieval. 
   1. Take pictures at the click of a button
   2. View and select images
   3. Crop and label images
@@ -26,6 +27,8 @@ Dependancy: This project runs on CameraX which can be found here: https://github
   2. Navigate to your desired location in the terminal
   3. `aws s3 sync s3://labellens-userfiles-mobilehub-866544857/public/* <your_folder>`
   4. Examine the results 👍
+
+  ![Preview_Image](https://labellens-userfiles-mobilehub-866544857.s3-us-west-2.amazonaws.com/public/Screen+Shot+2019-12-13+at+4.32.39+PM.png)
 
 ## Fragments
   1. Main Menu Fragment
@@ -59,8 +62,3 @@ Dependancy: This project runs on CameraX which can be found here: https://github
   - Picture taking method
   - Picture saving/storing
   - Implement CameraX
-
-## TODO
-  - use Camera2 to capture image (Replaced by CameraX)
-  - Create GUI for drawing boxes overlayed on captured image
-  - Make an API to get labeled data off backend
