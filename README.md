@@ -61,7 +61,9 @@ Dependancy: This project runs on CameraX which can be found here: https://github
   - Picture saving/storing
   - Implement CameraX
 
-## TODO
-  - use Camera2 to capture image (Replaced by CameraX)
+## Futures
   - Create GUI for drawing boxes overlayed on captured image
-  - Make an API to get labeled data off backend
+  - Gallery for choosing images to label
+  - Preview the cropped regions of interest
+  - Choose output formats (for ROI coordinates)
+    * JSON, XML, etc..
