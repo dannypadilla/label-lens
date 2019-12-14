@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import com.amazonaws.mobile.client.AWSMobileClient
@@ -156,6 +157,8 @@ class LabelImages : Fragment() {
             try {
                 mobileHelper.uploadWithTransferUtility(textFile)
                 mobileHelper.uploadWithTransferUtility(uploadedFile)
+                val msg = "Successfully uploaded to AWS: us-west-2:ce5b9bb8-c043-4e71-aa83-cac4e9599cdc"
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
             } catch (e: InterruptedException) {
                 e.printStackTrace()
