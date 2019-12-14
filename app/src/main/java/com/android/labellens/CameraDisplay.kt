@@ -59,8 +59,6 @@ class CameraDisplay : Fragment() {
 
         AWSMobileClient.getInstance().initialize(this.context).execute()
 
-        AWSMobileClient.getInstance().initialize(this.context).execute()
-
         return binding.root
     }
 
@@ -145,7 +143,7 @@ class CameraDisplay : Fragment() {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
                             //move this to wherever the image gets labelled so we can upload both at the same time
-                            //mobileHelper.uploadWithTransferUtility(file)
+                            mobileHelper.uploadWithTransferUtility(file)
                             view!!.findNavController().navigate(R.id.action_cameraDisplay_to_labelImages)
 
                             //move this to wherever the image gets labelled so we can upload both at the same time
